@@ -1,3 +1,14 @@
+/*
+ * Integrantes do grupo:
+ * - Gabriel [Seu Sobrenome]
+ * - [Nome do colega 1]
+ * - [Nome do colega 2]
+ * - [Nome do colega 3]
+ *
+ * Tema: Cadastro de Alunos
+ * Campos: Nome, Idade, Curso, Matrícula
+ */
+
 import javax.swing.JOptionPane;
 import java.io.FileWriter;
 import java.io.FileReader;
@@ -32,10 +43,14 @@ public class CrudMenuCsv {
     private static void adicionarRegistro() {
         String nome = JOptionPane.showInputDialog("Digite o nome:");
         String idade = JOptionPane.showInputDialog("Digite a idade:");
-        String cidade = JOptionPane.showInputDialog("Digite a cidade:");
+        String curso = JOptionPane.showInputDialog("Digite o curso:");
+        String matricula = JOptionPane.showInputDialog("Digite a matrícula:");
 
         try (FileWriter writer = new FileWriter(filePath, true)) {
-            writer.append(nome).append(",").append(idade).append(",").append(cidade).append("\n");
+            writer.append(nome).append(",")
+                  .append(idade).append(",")
+                  .append(curso).append(",")
+                  .append(matricula).append("\n");
             JOptionPane.showMessageDialog(null, "Registro adicionado com sucesso!");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Erro ao gravar no arquivo.");
@@ -64,15 +79,16 @@ public class CrudMenuCsv {
             return;
         }
 
-        String nomeBusca = JOptionPane.showInputDialog("Digite o nome do registro a ser atualizado:");
+        String nomeBusca = JOptionPane.showInputDialog("Digite o nome do aluno a ser atualizado:");
         boolean encontrado = false;
         for (int i = 0; i < registros.size(); i++) {
             String[] dados = registros.get(i).split(",");
             if (dados[0].equalsIgnoreCase(nomeBusca)) {
-                String novoNome = JOptionPane.showInputDialog("Digite o novo nome:", dados[0]);
-                String novaIdade = JOptionPane.showInputDialog("Digite a nova idade:", dados[1]);
-                String novaCidade = JOptionPane.showInputDialog("Digite a nova cidade:", dados[2]);
-                registros.set(i, novoNome + "," + novaIdade + "," + novaCidade);
+                String novoNome = JOptionPane.showInputDialog("Novo nome:", dados[0]);
+                String novaIdade = JOptionPane.showInputDialog("Nova idade:", dados[1]);
+                String novoCurso = JOptionPane.showInputDialog("Novo curso:", dados[2]);
+                String novaMatricula = JOptionPane.showInputDialog("Nova matrícula:", dados[3]);
+                registros.set(i, novoNome + "," + novaIdade + "," + novoCurso + "," + novaMatricula);
                 encontrado = true;
                 break;
             }
@@ -93,7 +109,7 @@ public class CrudMenuCsv {
             return;
         }
 
-        String nomeBusca = JOptionPane.showInputDialog("Digite o nome do registro a ser removido:");
+        String nomeBusca = JOptionPane.showInputDialog("Digite o nome do aluno a ser removido:");
         boolean encontrado = registros.removeIf(registro -> registro.split(",")[0].equalsIgnoreCase(nomeBusca));
 
         if (encontrado) {
