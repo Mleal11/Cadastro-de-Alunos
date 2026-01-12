@@ -1,2 +1,2 @@
 # Cadastro-de-Alunos
-Sistema de gerenciamento de alunios em JAVA.
+Sistema de gerenciamento de alunos em JAVA.
